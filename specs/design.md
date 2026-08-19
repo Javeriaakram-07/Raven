@@ -1,4 +1,3 @@
-```markdown
 # Raven — System Design Document
 
 **Version:** 2.0  
@@ -394,5 +393,3 @@ Full scan result object, pretty-printed, filename `raven-scan-<ISO-timestamp>.js
 | `NODE_ENV` | No | — | Set to `production` to enable rate limits for localhost |
 | `RATE_LIMIT_WINDOW_MS` | No | `900000` (15 min) | IP rate limit window |
 | `RATE_LIMIT_MAX` | No | `10` | IP rate limit max requests |
-```
-

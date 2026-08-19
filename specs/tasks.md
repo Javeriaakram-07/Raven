@@ -1,4 +1,3 @@
-```markdown
 # Raven — Implementation Task List
 
 **Version:** 2.0  
@@ -183,5 +182,3 @@ All tasks reflect the current implemented state of the system. Completed tasks a
 - 🔲 Test all 3 example prompts against live Groq — confirm Low / High / Critical outputs
 - 🔲 Record demo walkthrough
 - 🔲 Prepare screenshots for portfolio/presentation
-```
-

@@ -1,4 +1,3 @@
-```markdown
 # Raven — Requirements Specification
 
 **Version:** 2.0  
@@ -136,4 +135,3 @@ Chatbot builders using wrapper platforms (Voiceflow, Botpress, Custom GPTs, Bedr
 - The backend server has internet access to reach `api.groq.com`.
 - The local classifier (`Xenova/distilbert-base-uncased-mnli`) is downloaded on first server startup (~260 MB) and cached locally by `@huggingface/transformers`.
 - The frontend is served by Vite dev server on port 5173 in development; in production it can be served as static files from any HTTP server.
-```
