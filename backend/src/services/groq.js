@@ -32,7 +32,7 @@ async function callGroq(model, messages) {
 
   const payload = JSON.stringify({
     model,
-    max_tokens: 512,
+    max_tokens: 300,
     messages,
   });
 

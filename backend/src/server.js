@@ -73,8 +73,8 @@ app.listen(PORT, () => {
   const isProd = process.env.NODE_ENV === 'production';
   console.log(`Raven backend running on http://localhost:${PORT}`);
   console.log(`Environment:  ${isProd ? 'production' : 'development (rate limits bypassed for localhost)'}`);
-  console.log(`OpenRouter model: ${process.env.OPENROUTER_MODEL || 'anthropic/claude-haiku-4-5'}`);
-  console.log(`OpenRouter key:   ${process.env.OPENROUTER_API_KEY ? process.env.OPENROUTER_API_KEY.slice(0, 8) + '...' : '(not set — check .env)'}`);
+  console.log(`Groq model: ${process.env.Groq_MODEL || 'anthropic/claude-haiku-4-5'}`);
+  console.log(`Groq key:   ${process.env.Groq_API_KEY ? process.env.Groq_API_KEY.slice(0, 8) + '...' : '(not set — check .env)'}`);
 
   isRefusal('test')
     .then(() => console.log('[classifier] Warmed up and ready.'))
