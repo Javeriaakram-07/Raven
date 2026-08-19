@@ -22,12 +22,13 @@ cp .env.example .env
 
 Edit `.env` and fill in:
 
+```
 GROQ_API_KEY=your_groq_key_here
 GROQ_MODEL=openai/gpt-oss-20b
 PORT=3001
 RATE_LIMIT_WINDOW_MS=900000
 RATE_LIMIT_MAX=10
-
+```
 
 ### 2. Install and start the backend
 
@@ -68,12 +69,13 @@ Open `http://localhost:5173` in your browser.
 
 ## Architecture
 
+```
 frontend (React + Vite, port 5173)
-↕ HTTP POST /api/scan (cookie-based session)
+  ↕ HTTP POST /api/scan (cookie-based session)
 backend (Express, port 3001)
-↕ Groq API (attack payloads → target model)
-↕ local classifier model (refusal detection, runs on-server)
-
+  ↕ Groq API (attack payloads → target model)
+  ↕ local classifier model (refusal detection, runs on-server)
+```
 
 - System prompts are **never stored** — they exist only for the duration of the HTTP request.
 - API keys live in `.env` on the backend; the frontend never touches them.
@@ -131,34 +133,35 @@ Attacks are defined in `backend/src/data/attacks.json`. Add a new entry there to
 
 ## Project Structure
 
+```
 raven/
 ├── backend/
-│ ├── src/
-│ │ ├── server.js
-│ │ ├── routes/scan.js
-│ │ ├── middleware/scanLimiter.js
-│ │ ├── services/openrouter.js # Groq API client
-│ │ ├── services/classifier.js # local refusal classifier
-│ │ ├── services/scanner.js
-│ │ ├── detection/detectors.js
-│ │ ├── utils/errorMapper.js
-│ │ └── data/attacks.json
-│ ├── .env.example
-│ └── package.json
+│   ├── src/
+│   │   ├── server.js
+│   │   ├── routes/scan.js
+│   │   ├── middleware/scanLimiter.js
+│   │   ├── services/groq.js          # Groq API client
+│   │   ├── services/classifier.js    # local refusal classifier
+│   │   ├── services/scanner.js
+│   │   ├── detection/detectors.js
+│   │   ├── utils/errorMapper.js
+│   │   └── data/attacks.json
+│   ├── .env.example
+│   └── package.json
 ├── frontend/
-│ ├── src/
-│ │ ├── App.jsx
-│ │ ├── components/
-│ │ ├── hooks/useScan.js
-│ │ ├── utils/pdfExport.js
-│ │ └── styles/index.css
-│ ├── public/
-│ └── package.json
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── components/
+│   │   ├── hooks/useScan.js
+│   │   ├── utils/pdfExport.js
+│   │   └── styles/index.css
+│   ├── public/
+│   └── package.json
 └── docs/
-├── requirements.md
-├── design.md
-└── tasks.md
-
+    ├── requirements.md
+    ├── design.md
+    └── tasks.md
+```
 
 ---
 
