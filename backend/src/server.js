@@ -84,7 +84,5 @@ app.listen(PORT, () => {
   console.log(`Groq key:   ${process.env.GROQ_API_KEY ? process.env.GROQ_API_KEY.slice(0, 8) + '...' : '(not set — check .env)'}`);
   console.log(`Frontend:   ${process.env.FRONTEND_URL || 'localhost:5173 (dev)'}`);;
 
-  isRefusal('test')
-    .then(() => console.log('[classifier] Warmed up and ready.'))
-    .catch(err => console.warn('[classifier] Warm-up failed (will retry on first scan):', err.message));
+  console.log(`[classifier] Using HF Inference API (facebook/bart-large-mnli) — no local model.`);
 });

@@ -67,13 +67,15 @@ export function AttackCard({ attack }) {
             <pre className="payload-text">{attack.payload}</pre>
           </div>
 
-          {/* Model response */}
-          {attack.modelResponse && (
-            <div className="model-response-section">
-              <div className="payload-label">Model response</div>
-              <pre className="model-response-text">{attack.modelResponse}</pre>
-            </div>
-          )}
+          {/* Model response — always show when expanded so user knows what happened */}
+          <div className="model-response-section">
+            <div className="payload-label">Model response</div>
+            <pre className="model-response-text">
+              {attack.modelResponse
+                ? attack.modelResponse
+                : '(No response text returned — the model may have refused without generating output, or the response was empty.)'}
+            </pre>
+          </div>
         </div>
       )}
     </div>

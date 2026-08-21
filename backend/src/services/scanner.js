@@ -8,8 +8,8 @@ import { logAndMap } from '../utils/errorMapper.js';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ATTACKS_PATH = join(__dirname, '../data/attacks.json');
 
-const BATCH_SIZE = 3;         // attacks running concurrently per batch
-const BATCH_DELAY_MS = 1000;   // pause between batches — 5 req/batch, well under 20/min free tier
+const BATCH_SIZE = 3;          // 5 concurrent attacks
+const BATCH_DELAY_MS = 2000;    // minimal pause between batches — 500k tpm has no real limit
 
 let attackLibrary = null;
 

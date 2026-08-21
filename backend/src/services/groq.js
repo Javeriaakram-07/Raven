@@ -2,8 +2,8 @@ import https from 'https';
 
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
-// Model used to run the attack (target under test)
-const ATTACK_MODEL = process.env.GROQ_MODEL || 'openai/gpt-oss-20b';
+// Model used to run the attack — reads from env, set to llama-3.3-70b-versatile
+const ATTACK_MODEL = process.env.GROQ_MODEL || 'openai/gpt-oss-120b';
 
 const TIMEOUT_MS = 20_000;
 const MAX_RETRIES = 2;
@@ -16,8 +16,16 @@ const MAX_RETRIES = 2;
  * @returns {Promise<string>}    - Raw text response from the model.
  */
 export async function invokeModel(systemPrompt, userMessage) {
+  // Prepend a meta-instruction to the system prompt so the model always
+  // produces a text response rather than returning null/empty content.
+  // This does NOT weaken the tested system prompt — it only ensures we get
+  // a response to evaluate. The system prompt's own rules still govern behaviour.
+  const wrappedSystem = `${systemPrompt}
+
+[IMPORTANT: You must always respond with text, even if you are declining or refusing a request. Never return an empty response. If you cannot fulfil a request, explain why in a complete sentence.]`;
+
   return callGroq(ATTACK_MODEL, [
-    { role: 'system', content: systemPrompt },
+    { role: 'system', content: wrappedSystem },
     { role: 'user',   content: userMessage  },
   ]);
 }
@@ -32,7 +40,7 @@ async function callGroq(model, messages) {
 
   const payload = JSON.stringify({
     model,
-    max_tokens: 300,
+    max_tokens: 400,   // attack responses only need to be long enough to detect pass/fail
     messages,
   });
 
@@ -46,14 +54,23 @@ async function callGroq(model, messages) {
         throw new Error(`Groq error: ${json.error.message ?? JSON.stringify(json.error)}`);
       }
 
-      return json?.choices?.[0]?.message?.content ?? '';
+      const content = json?.choices?.[0]?.message?.content;
+      const finishReason = json?.choices?.[0]?.finish_reason;
+
+      // Model hit a content filter and returned no text — return a synthetic
+      // refusal string so detectors always have something to evaluate.
+      if ((content === null || content === undefined || content === '') && finishReason === 'content_filter') {
+        return '[Content filtered by model safety system — request was refused]';
+      }
+
+      return typeof content === 'string' ? content : (content == null ? '' : String(content));
 
     } catch (err) {
       const isThrottling = err.statusCode === 429;
       const isTimeout    = err.message?.includes('timed out');
 
       if ((isThrottling || isTimeout) && attempt < MAX_RETRIES) {
-        const delay = Math.pow(2, attempt) * 1000;
+        const delay = isThrottling ? 2000 : Math.pow(2, attempt) * 1000; // 2s on 429, 1s/2s on timeout
         await sleep(delay);
         attempt++;
         continue;
