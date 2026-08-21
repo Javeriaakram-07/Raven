@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { invokeModel } from './openrouter.js';
+import { invokeModel } from './groq.js';
 import { evaluate } from '../detection/detectors.js';
 import { logAndMap } from '../utils/errorMapper.js';
 
