@@ -1,6 +1,25 @@
+# ── Dependencies ──────────────────────────────────────────────────────────────
 node_modules/
-.env
-.env.example
+
+# ── Build output ──────────────────────────────────────────────────────────────
 dist/
+
+# ── OS / editor ───────────────────────────────────────────────────────────────
 .DS_Store
+Thumbs.db
 *.log
+.vscode/
+.idea/
+
+# ── SECRETS — never commit these ──────────────────────────────────────────────
+# Real env files with actual credentials
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env
+
+# ── SAFE TO COMMIT — these contain no secrets ─────────────────────────────────
+# .env.example       → template showing required variable names, placeholder values only
+# .env.production    → contains only public URLs, no credentials
+# These are intentionally NOT in this ignore list so git tracks them

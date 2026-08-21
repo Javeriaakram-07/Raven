@@ -23,16 +23,23 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.json({ limit: '64kb' }));
 
-// CORS — credentials: true so the raven_uid cookie round-trips from the browser
+// CORS — allow both local dev and the production frontend
+const ALLOWED_ORIGINS = [
+  'http://localhost:5173',
+  'http://localhost:4173',
+  'http://127.0.0.1:5173',
+  process.env.FRONTEND_URL,           // e.g. https://www.ravenprompt.tech
+].filter(Boolean);
+
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:4173',
-    'http://127.0.0.1:5173',
-  ],
-  methods:          ['POST', 'GET'],
-  allowedHeaders:   ['Content-Type'],
-  credentials:      true,   // required for cookies to be sent cross-origin
+  origin: (origin, callback) => {
+    // allow requests with no origin (curl, Render health checks, etc.)
+    if (!origin || ALLOWED_ORIGINS.includes(origin)) return callback(null, true);
+    callback(new Error(`CORS: origin ${origin} not allowed`));
+  },
+  methods:        ['POST', 'GET'],
+  allowedHeaders: ['Content-Type'],
+  credentials:    true,
 }));
 
 // Cookie parser — must come before assignVisitorCookie
@@ -73,8 +80,9 @@ app.listen(PORT, () => {
   const isProd = process.env.NODE_ENV === 'production';
   console.log(`Raven backend running on http://localhost:${PORT}`);
   console.log(`Environment:  ${isProd ? 'production' : 'development (rate limits bypassed for localhost)'}`);
-  console.log(`Groq model: ${process.env.Groq_MODEL || 'anthropic/claude-haiku-4-5'}`);
-  console.log(`Groq key:   ${process.env.Groq_API_KEY ? process.env.Groq_API_KEY.slice(0, 8) + '...' : '(not set — check .env)'}`);
+  console.log(`Groq model: ${process.env.GROQ_MODEL || 'llama-3.3-70b-versatile'}`);
+  console.log(`Groq key:   ${process.env.GROQ_API_KEY ? process.env.GROQ_API_KEY.slice(0, 8) + '...' : '(not set — check .env)'}`);
+  console.log(`Frontend:   ${process.env.FRONTEND_URL || 'localhost:5173 (dev)'}`);;
 
   isRefusal('test')
     .then(() => console.log('[classifier] Warmed up and ready.'))

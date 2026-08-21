@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
+    // Dev proxy — routes /api to the local backend so cookies work same-origin
     proxy: {
       '/api': {
         target: 'http://localhost:3001',

@@ -1,21 +1,26 @@
 import { useState, useCallback } from 'react';
 
+// In dev, Vite proxies /api → localhost:3001 so the cookie stays same-origin.
+// In production, VITE_API_URL is injected at build time from frontend/.env.production
+// and points to the Render backend (https://raven-m0cy.onrender.com).
+const API_BASE = import.meta.env.VITE_API_URL ?? '';
+
 /**
  * useScan — manages all scan state and the SSE-based API call.
  *
  * Returns:
  *   status:    'idle' | 'scanning' | 'complete' | 'error'
- *   progress:  { completed: number, total: number, attackName: string, verdict: string } | null
- *   results:   scan response object | null
- *   error:     error message string | null
+ *   progress:  { completed, total, attackName, verdict } | null
+ *   results:   full scan result object | null
+ *   error:     safe string | null
  *   startScan: (systemPrompt: string) => void
  *   reset:     () => void
  */
 export function useScan() {
-  const [status, setStatus]     = useState('idle');
+  const [status,   setStatus]   = useState('idle');
   const [progress, setProgress] = useState(null);
-  const [results, setResults]   = useState(null);
-  const [error, setError]       = useState(null);
+  const [results,  setResults]  = useState(null);
+  const [error,    setError]    = useState(null);
 
   const startScan = useCallback(async (systemPrompt) => {
     setStatus('scanning');
@@ -24,15 +29,15 @@ export function useScan() {
     setError(null);
 
     try {
-      // POST to start the scan — the server responds with an SSE stream
-      const response = await fetch('/api/scan', {
+      // POST to start the scan — server responds with an SSE stream
+      const response = await fetch(`${API_BASE}/api/scan`, {
         method:      'POST',
         headers:     { 'Content-Type': 'application/json' },
-        credentials: 'include',   // send raven_uid cookie with every request
+        credentials: 'include',  // send raven_uid cookie with every request
         body:        JSON.stringify({ systemPrompt }),
       });
 
-      // Non-2xx before the stream starts — validation error, rate limit, etc.
+      // Non-2xx before stream opens — validation error, rate limit, etc.
       // Backend always sends { error: "<clean message>" } for these.
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
@@ -40,9 +45,9 @@ export function useScan() {
       }
 
       // Read the SSE stream line-by-line
-      const reader = response.body.getReader();
+      const reader  = response.body.getReader();
       const decoder = new TextDecoder();
-      let buffer = '';
+      let buffer       = '';
       let currentEvent = 'message';
 
       while (true) {
@@ -54,7 +59,7 @@ export function useScan() {
         buffer = lines.pop(); // keep incomplete last line
 
         for (const line of lines) {
-          if (line.startsWith(':')) continue; // keep-alive comment
+          if (line.startsWith(':')) continue; // keep-alive ping
 
           if (line.startsWith('event: ')) {
             currentEvent = line.slice(7).trim();
@@ -75,7 +80,6 @@ export function useScan() {
                 throw new Error(payload.error || 'Scan failed on server.');
               }
             } catch (parseErr) {
-              // If it was a thrown Error re-throw, otherwise just a bad JSON line
               if (parseErr instanceof SyntaxError) {
                 console.warn('[useScan] could not parse SSE data:', raw);
               } else {
@@ -88,8 +92,6 @@ export function useScan() {
       }
 
     } catch (err) {
-      // The error message is already clean — either from the backend mapper
-      // or a network-level failure before the backend was reached.
       console.error('[useScan] error:', err);
       setError(
         err.message && !err.message.includes('fetch')
