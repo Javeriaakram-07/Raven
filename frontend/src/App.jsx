@@ -94,7 +94,8 @@ export default function App() {
       </main>
 
       <footer className="footer" role="contentinfo">
-        Raven — built by Javeria Akram · © 2026
+        Raven — Built by <a href="https://www.linkedin.com/in/javeria-akram-10b607334/">Javeria Akram</a> —
+        Agentic AI, Cybersecurity, and Web Development builder.· © 2026
       </footer>
     </div>
   );
