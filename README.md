@@ -190,3 +190,8 @@ cd frontend && npm run dev
 - Never commit your `.env` file — it's excluded via `.gitignore`.
 - Run `npm audit` in both `backend/` and `frontend/` before deploying.
 - Known issue: `@huggingface/transformers` pulls in transitive dependencies (`sharp`, `adm-zip`) with disclosed high-severity CVEs used internally for ONNX model handling. Raven does not process user-supplied images through these paths; risk assessed as low for this use case pending an upstream fix.
+---
+
+## Author
+
+Built by [Javeria Akram](https://www.linkedin.com/in/javeria-akram-10b607334/) — Agentic AI, Cybersecurity, and Web Development builder.
