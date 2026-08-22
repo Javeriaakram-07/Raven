@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — Raven</title>
+  <meta name="description" content="Raven Terms of Service. Understand what Raven is, acceptable use, scope limits, and liability." />
+  <link rel="stylesheet" href="/docs/docs.css" />
+  <link rel="icon" type="image/svg+xml" href="/raven.svg" />
+</head>
+<body>
+
+<nav class="nav" aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Raven home">
+      <svg width="22" height="22" viewBox="0 0 48 48" fill="none"><rect x="1" y="1" width="46" height="46" rx="4" stroke="#00a86b" stroke-width="1.5"/><path d="M12 32L19 15L24 25L29 15L36 32" stroke="#00a86b" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" fill="none"/><circle cx="24" cy="25" r="1.8" fill="#00a86b"/></svg>
+      Raven
+    </a>
+    <div class="nav-links">
+      <a href="/docs">Docs</a>
+      <a href="/docs/about">Founder</a>
+      <a href="/docs/privacy">Privacy</a>
+      <a href="/docs/terms" class="active">Terms</a>
+    </div>
+    <a href="/" class="nav-cta">Run a scan</a>
+  </div>
+</nav>
+
+<main class="page">
+  <h1>Terms of Service</h1>
+  <p class="lead">By using Raven you agree to these terms. They are intentionally plain language. If anything is unclear, contact Javeria Akram via LinkedIn.</p>
+
+  <h2>What Raven is</h2>
+  <p>Raven is a tool for testing the resilience of AI chatbot system prompts against known adversarial attack patterns. It is provided as-is for educational and security research purposes. It is not a certified security auditing service, and a passing scan result does not constitute a professional security certification or guarantee.</p>
+
+  <h2>Acceptable use</h2>
+  <p>You may use Raven to test system prompts that you own or have explicit permission to test. You may not use Raven to:</p>
+  <ul>
+    <li>Test system prompts belonging to third parties without their knowledge and consent.</li>
+    <li>Attempt to reverse-engineer, extract, or reproduce the system prompts of third-party deployed chatbots by running them through Raven.</li>
+    <li>Circumvent or attempt to circumvent rate limits through automated requests, multiple accounts, or other means.</li>
+    <li>Use scan results to cause harm to others or to assist in attacks against AI systems.</li>
+    <li>Submit prompts that contain illegal content, personally identifiable information belonging to others, or content that violates applicable laws.</li>
+  </ul>
+
+  <h2>Scan results and accuracy</h2>
+  <p>Raven's scan results are informational. They reflect the behaviour of the specific sandboxed model instance used at the time of the scan. A system prompt that passes all 25 attacks in Raven may still be vulnerable to attacks not in Raven's library, to attacks specific to your deployment platform, or to attacks that work differently against your production model. Raven does not replace a full security review.</p>
+
+  <div class="callout">
+    <p>Raven tests your system prompt in isolation. It does not account for your deployment platform's own safeguards, your production model's specific behaviour, or runtime context that may affect security in your live deployment.</p>
+  </div>
+
+  <h2>No warranties</h2>
+  <p>Raven is provided "as is" without warranty of any kind, express or implied. The operator makes no warranty that the service will be uninterrupted, error-free, or that the results will be accurate or complete.</p>
+
+  <h2>Limitation of liability</h2>
+  <p>To the maximum extent permitted by applicable law, the operator of Raven shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising from your use of the service or reliance on its results. This includes, without limitation, damages arising from security incidents in your production AI deployments.</p>
+
+  <h2>Third-party services</h2>
+  <p>Raven uses external AI inference infrastructure to process scan requests. Your system prompt and attack payloads are sent to these services as part of each scan. Raven is not responsible for the availability, accuracy, or policies of third-party infrastructure providers.</p>
+
+  <h2>Rate limits and availability</h2>
+  <p>Raven is a free service. Each browser session is limited to 2 scans per rolling hour. The operator reserves the right to modify, suspend, or discontinue the service at any time without notice.</p>
+
+  <h2>Changes to these terms</h2>
+  <p>These terms may be updated at any time. The current version is always available at this URL. Continued use of Raven after a change constitutes acceptance of the updated terms.</p>
+  <p>Last updated: August 2026.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about these terms can be directed to Javeria Akram via <a href="https://www.linkedin.com/in/javeria-akram-10b607334/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
+</main>
+
+<footer>
+  <div class="doc-footer">
+    <div class="doc-footer-inner">
+      <span>Raven, 2026</span>
+      <div class="doc-footer-links">
+        <a href="/docs">Docs</a>
+        <a href="/docs/about">Founder</a>
+        <a href="/docs/privacy">Privacy</a>
+        <a href="/docs/terms">Terms</a>
+        <a href="/">Run a scan</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

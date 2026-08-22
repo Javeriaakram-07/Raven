@@ -45,6 +45,10 @@ export default function App() {
           </h1>
           <p className="header-tagline">AI system prompt vulnerability scanner</p>
         </div>
+        <nav style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 16 }}>
+          <a href="/docs" style={{ fontSize: 13, color: 'var(--text-secondary)', textDecoration: 'none' }}>Docs</a>
+          <a href="/docs/about" style={{ fontSize: 13, color: 'var(--text-secondary)', textDecoration: 'none' }}>Founder</a>
+        </nav>
       </header>
 
       <main role="main">
@@ -94,8 +98,7 @@ export default function App() {
       </main>
 
       <footer className="footer" role="contentinfo">
-        Raven — Built by <a href="https://www.linkedin.com/in/javeria-akram-10b607334/">Javeria Akram</a> —
-        Agentic AI, Cybersecurity, and Web Development builder.· © 2026
+        Raven, built by <a href="/docs/about">Javeria Akram</a> &middot; <a href="/docs">Docs</a> &middot; <a href="/docs/privacy">Privacy</a> &middot; <a href="/docs/terms">Terms</a> &middot; &copy; 2026
       </footer>
     </div>
   );

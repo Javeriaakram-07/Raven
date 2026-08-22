@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Founder — Raven</title>
+  <meta name="description" content="Javeria Akram, founder of Raven. Computer Science student at PUCIT, FCIT. Working across agentic AI, cybersecurity, and web development." />
+  <link rel="stylesheet" href="/docs/docs.css" />
+  <link rel="icon" type="image/svg+xml" href="/raven.svg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Javeria Akram",
+    "jobTitle": "Computer Science Student",
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "PUCIT, FCIT, University of the Punjab"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressCountry": "PK"
+    },
+    "url": "https://www.linkedin.com/in/javeria-akram-10b607334/",
+    "sameAs": ["https://www.linkedin.com/in/javeria-akram-10b607334/"],
+    "description": "Campus Ambassador at GeeksforGeeks. Working across agentic AI, cybersecurity, and web development. Experience in cloud computing, security audits, network analysis, backend systems, and cloud infrastructure.",
+    "knowsAbout": ["Agentic AI", "Cybersecurity", "Web Development", "Cloud Computing", "Network Analysis", "Security Audits"]
+  }
+  </script>
+</head>
+<body>
+
+<nav class="nav" aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Raven home">
+      <svg width="22" height="22" viewBox="0 0 48 48" fill="none"><rect x="1" y="1" width="46" height="46" rx="4" stroke="#00a86b" stroke-width="1.5"/><path d="M12 32L19 15L24 25L29 15L36 32" stroke="#00a86b" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" fill="none"/><circle cx="24" cy="25" r="1.8" fill="#00a86b"/></svg>
+      Raven
+    </a>
+    <div class="nav-links">
+      <a href="/docs">Docs</a>
+      <a href="/docs/about" class="active">Founder</a>
+      <a href="/docs/privacy">Privacy</a>
+      <a href="/docs/terms">Terms</a>
+    </div>
+    <a href="/" class="nav-cta">Run a scan</a>
+  </div>
+</nav>
+
+<main class="page">
+  <h1>Founder</h1>
+  <p class="lead">Raven was built by Javeria Akram, a Computer Science student and builder working at the intersection of AI security and web development.</p>
+
+  <div class="founder-card">
+    <div class="founder-avatar" aria-hidden="true">J</div>
+    <div>
+      <p class="founder-name">Javeria Akram</p>
+      <p class="founder-role">CS Student at PUCIT, FCIT, University of the Punjab, Lahore. Campus Ambassador at GeeksforGeeks.</p>
+      <div class="founder-links">
+        <a href="https://www.linkedin.com/in/javeria-akram-10b607334/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <h2>Background</h2>
+  <p>Javeria is studying Computer Science at PUCIT, FCIT, based in Lahore, Pakistan. Her work spans agentic AI, cybersecurity, and web development, with hands-on experience across cloud computing, security audits, network analysis, backend systems, and cloud infrastructure.</p>
+  <p>As Campus Ambassador at GeeksforGeeks, she works to build technical communities and share knowledge across the developer ecosystem in Pakistan.</p>
+
+  <h2>Why Raven</h2>
+  <p>Raven started from a practical gap: chatbot builders who configure their bots through system prompts on platforms like Voiceflow, Botpress, or custom GPTs have no way to test whether their prompt is exploitable before going live. Existing security tooling requires direct API access to the target model. Most chatbot builders do not have that.</p>
+  <p>Raven solves this by treating the system prompt itself as the artifact under test. Load the prompt into a sandboxed model, fire a library of adversarial payloads against it, and report what broke. No live bot access needed.</p>
+
+  <h2>Technical approach</h2>
+  <p>The detection system follows the architecture of NVIDIA's Garak (the industry-standard LLM vulnerability scanner): fast deterministic pattern detectors run first for unambiguous cases, and a zero-shot classifier handles edge cases. This minimises false positives while remaining accurate enough for practical use.</p>
+  <p>The attack library uses indirect, socially engineered payloads rather than obvious jailbreak phrases. Tests that any safety-trained model refuses regardless of the system prompt do not measure the system prompt's resilience. They measure the base model's alignment. Raven is careful to test the former, not the latter.</p>
+
+  <h2>Contact</h2>
+  <p>Reach out via <a href="https://www.linkedin.com/in/javeria-akram-10b607334/" target="_blank" rel="noopener noreferrer">LinkedIn</a> for questions about Raven, collaboration, or feedback.</p>
+</main>
+
+<footer>
+  <div class="doc-footer">
+    <div class="doc-footer-inner">
+      <span>Raven, 2026</span>
+      <div class="doc-footer-links">
+        <a href="/docs">Docs</a>
+        <a href="/docs/about">Founder</a>
+        <a href="/docs/privacy">Privacy</a>
+        <a href="/docs/terms">Terms</a>
+        <a href="/">Run a scan</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

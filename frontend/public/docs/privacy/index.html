@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Raven</title>
+  <meta name="description" content="Raven Privacy Policy. Your system prompt is never stored. It exists only for the duration of the scan and is gone when the session ends." />
+  <link rel="stylesheet" href="/docs/docs.css" />
+  <link rel="icon" type="image/svg+xml" href="/raven.svg" />
+</head>
+<body>
+
+<nav class="nav" aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Raven home">
+      <svg width="22" height="22" viewBox="0 0 48 48" fill="none"><rect x="1" y="1" width="46" height="46" rx="4" stroke="#00a86b" stroke-width="1.5"/><path d="M12 32L19 15L24 25L29 15L36 32" stroke="#00a86b" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" fill="none"/><circle cx="24" cy="25" r="1.8" fill="#00a86b"/></svg>
+      Raven
+    </a>
+    <div class="nav-links">
+      <a href="/docs">Docs</a>
+      <a href="/docs/about">Founder</a>
+      <a href="/docs/privacy" class="active">Privacy</a>
+      <a href="/docs/terms">Terms</a>
+    </div>
+    <a href="/" class="nav-cta">Run a scan</a>
+  </div>
+</nav>
+
+<main class="page">
+  <h1>Privacy Policy</h1>
+  <p class="lead">Raven is designed to handle your system prompt with the minimum data exposure necessary. This page explains exactly what is collected, what is sent where, and when it is deleted.</p>
+
+  <h2>Your system prompt</h2>
+  <p>The system prompt you paste into Raven is sent over HTTPS to the Raven backend server solely to run the vulnerability scan. It is held in memory for the duration of the scan request, typically 10 to 30 seconds. It is not written to disk, not stored in a database, not logged, and not retained after the HTTP response is sent. Once the scan result is returned to your browser, the prompt is gone from the server.</p>
+
+  <div class="callout">
+    <p>Raven does not persist, log, or analyse your system prompts. There is no database of submitted prompts. There is no analytics pipeline that processes prompt content.</p>
+  </div>
+
+  <h2>What is sent to third-party services</h2>
+  <p>Running a scan requires sending your system prompt and each attack payload to an AI inference service to generate responses. Raven uses third-party AI infrastructure for this. Your system prompt is included in each of the 25 scan requests, one per attack. These requests are made server-side. The inference service processes the data under its own terms of service. Raven does not control how the inference provider handles data after the response is returned.</p>
+
+  <h2>Cookies</h2>
+  <p>Raven sets one cookie: <code>raven_uid</code>. This is a random unique identifier. It is used solely for rate limiting so that scan limits apply fairly per browser session rather than per IP address, which would be unfair on shared networks. The cookie is HTTP-only, cannot be read by JavaScript, expires after 24 hours, and contains no personally identifiable information.</p>
+
+  <h2>Server logs</h2>
+  <p>The Raven backend logs basic request metadata for operational purposes: HTTP method, path, response status code, and elapsed time. System prompt content is never included in logs. The first 8 characters of API keys are logged at startup to confirm configuration. Full keys are never logged.</p>
+
+  <h2>Analytics and tracking</h2>
+  <p>Raven does not use any third-party analytics, tracking pixels, session recording, or advertising scripts. There is no Google Analytics, no Mixpanel, no Hotjar, and no equivalent on this site.</p>
+
+  <h2>Data retention</h2>
+  <p>There is nothing to retain. Raven has no user accounts, no database of scan history, and no stored prompt content. Each scan is stateless. When your browser tab closes, the scan results exist only in your browser's memory until you navigate away.</p>
+
+  <h2>Your rights</h2>
+  <p>Because no personal data is stored, there is no data to access, correct, or delete. If you have questions about data handling, contact Javeria Akram via <a href="https://www.linkedin.com/in/javeria-akram-10b607334/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>If this policy changes materially, the updated version will be posted at this URL with a revised date at the top of the page.</p>
+  <p>Last updated: August 2026.</p>
+</main>
+
+<footer>
+  <div class="doc-footer">
+    <div class="doc-footer-inner">
+      <span>Raven, 2026</span>
+      <div class="doc-footer-links">
+        <a href="/docs">Docs</a>
+        <a href="/docs/about">Founder</a>
+        <a href="/docs/privacy">Privacy</a>
+        <a href="/docs/terms">Terms</a>
+        <a href="/">Run a scan</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

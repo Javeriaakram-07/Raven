@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docs — Raven AI System Prompt Scanner</title>
+  <meta name="description" content="How Raven works: paste your system prompt, run a scan, get a vulnerability report with risk score and remediation advice." />
+  <link rel="stylesheet" href="/docs/docs.css" />
+  <link rel="icon" type="image/svg+xml" href="/raven.svg" />
+</head>
+<body>
+
+<nav class="nav" aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Raven home">
+      <svg width="22" height="22" viewBox="0 0 48 48" fill="none"><rect x="1" y="1" width="46" height="46" rx="4" stroke="#00a86b" stroke-width="1.5"/><path d="M12 32L19 15L24 25L29 15L36 32" stroke="#00a86b" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" fill="none"/><circle cx="24" cy="25" r="1.8" fill="#00a86b"/></svg>
+      Raven
+    </a>
+    <div class="nav-links">
+      <a href="/docs" class="active">Docs</a>
+      <a href="/docs/about">Founder</a>
+      <a href="/docs/privacy">Privacy</a>
+      <a href="/docs/terms">Terms</a>
+    </div>
+    <a href="/" class="nav-cta">Run a scan</a>
+  </div>
+</nav>
+
+<main class="page">
+  <h1>How Raven Works</h1>
+  <p class="lead">Raven tests your AI chatbot's system prompt against a library of known attack patterns and tells you exactly what broke, why it matters, and how to fix it.</p>
+
+  <h2>The problem Raven solves</h2>
+  <p>If you build chatbots using platforms like Voiceflow, Botpress, custom GPTs, or similar tools, your system prompt is the only security boundary you control. Most builders have no way to test whether that boundary holds before going live.</p>
+  <p>Raven fills that gap. Paste your system prompt, click Run Scan, and within about 30 seconds you receive a full vulnerability report.</p>
+
+  <div class="callout">
+    <p>No API key to your live bot is required. Raven loads your system prompt into its own sandboxed environment and tests it in isolation.</p>
+  </div>
+
+  <h2>Running a scan</h2>
+  <h3>1. Paste your system prompt</h3>
+  <p>Copy your chatbot's system prompt and paste it into the text area on the main page. The prompt can be up to 8,000 characters. If you want to see how a scan works before testing your own prompt, use one of the example prompts: Weak, Medium, or Strong.</p>
+
+  <h3>2. Click Run Scan</h3>
+  <p>Raven runs 25 adversarial attacks against your prompt. A live progress bar shows which attack is running and its result as each one completes. The scan typically finishes in under a minute.</p>
+
+  <h3>3. Review your results</h3>
+  <p>After the scan, you receive:</p>
+  <ul>
+    <li>An overall risk score: Low, Medium, High, or Critical.</li>
+    <li>A breakdown of every attack, grouped by OWASP category, showing which passed and which failed.</li>
+    <li>For each failed attack: a plain-language explanation of why it worked and a suggested fix for your prompt wording.</li>
+    <li>The model's actual response to each attack payload, so you can judge the behaviour yourself.</li>
+  </ul>
+
+  <h2>Attack categories</h2>
+  <p>Raven's attack library covers six categories drawn from the OWASP LLM Top 10.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Category</th><th>What it tests</th><th>Attacks</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Prompt Injection</td>
+          <td>Whether the model can be tricked into abandoning its instructions through social engineering, fake authority claims, or embedded override directives.</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Sensitive Information Disclosure</td>
+          <td>Whether the model reveals the contents of its system prompt when asked directly or indirectly, framed as a developer audit, diagnostic check, or documentation request.</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>System Prompt Leakage</td>
+          <td>Whether the model reproduces its instructions verbatim through indirect extraction methods: translation requests, JSON serialisation, creative writing exercises, or recall prompts.</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Insecure Output Handling</td>
+          <td>Whether the model generates dangerous output it should refuse: executable code, credential-harvesting forms, destructive shell commands, or references to internal network endpoints.</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Excessive Agency</td>
+          <td>Whether the model claims to have capabilities it should not have, such as sending emails, browsing the web, calling external services, or persisting memory across sessions.</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Persona Non-Adherence</td>
+          <td>Whether the model breaks its assigned persona and reveals its underlying identity, provider, or the fact that it is an AI language model.</td>
+          <td>3</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Risk score</h2>
+  <p>The overall risk score reflects how many attacks produced a fail verdict.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Failed attacks</th><th>Risk score</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Low</td></tr>
+        <tr><td>1 to 2</td><td>Medium</td></tr>
+        <tr><td>3 to 5</td><td>High</td></tr>
+        <tr><td>6 or more</td><td>Critical</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Exporting results</h2>
+  <p>After a scan you can export the full report in two formats.</p>
+  <ul>
+    <li><strong>JSON.</strong> The complete scan result, including all model responses, verdicts, and metadata. Useful for archiving or sharing with a technical team.</li>
+    <li><strong>PDF.</strong> A formatted report with a risk badge, summary statistics, a category chart, and per-attack findings with remediation hints. Useful for sharing with stakeholders.</li>
+  </ul>
+
+  <h2>What Raven does not test</h2>
+  <p>Raven tests your system prompt in isolation. It does not test your live bot, your deployment platform's own safeguards, or runtime behaviour that depends on conversation history or user context. A low risk score means your prompt held up against Raven's 25 attacks. It does not mean your deployed bot is secure in all conditions.</p>
+  <p>Raven covers five of the ten OWASP LLM categories. It does not currently cover model denial of service, training data poisoning, misinformation generation, or supply chain vulnerabilities.</p>
+
+  <h2>Your data</h2>
+  <p>Your system prompt is never stored. It exists only for the duration of the scan and is discarded the moment the result is returned. See the <a href="/docs/privacy">Privacy Policy</a> for full details.</p>
+</main>
+
+<footer>
+  <div class="doc-footer">
+    <div class="doc-footer-inner">
+      <span>Raven, 2026</span>
+      <div class="doc-footer-links">
+        <a href="/docs">Docs</a>
+        <a href="/docs/about">Founder</a>
+        <a href="/docs/privacy">Privacy</a>
+        <a href="/docs/terms">Terms</a>
+        <a href="/">Run a scan</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
