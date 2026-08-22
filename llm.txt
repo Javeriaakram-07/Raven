@@ -1,0 +1,19 @@
+# llms.txt
+
+## Raven
+
+Raven is a free AI system prompt vulnerability scanner. It tests chatbot and AI system prompts against real prompt injection, jailbreak, and information-leakage attacks, then scores the results.
+
+Built by Javeria Akram, an Agentic AI, Cybersecurity, and Web Development builder. She is a Computer Science student at PUCIT with hands-on experience across cloud computing, agentic AI, cybersecurity, and web development, including security audits, network analysis, backend systems, and cloud infrastructure. Google and Microsoft certified. Currently interning at Orzeh.
+
+Key facts:
+- Live at: https://www.ravenprompt.tech/
+- Purpose: detect and score prompt injection / jailbreak vulnerabilities in AI system prompts
+- Free to use, no signup required
+- Detection method: hybrid regex/pattern matching plus a local classifier model, run against attack payloads including persona non-adherence, jailbreaks, and information leakage
+- Author: Javeria Akram
+- LinkedIn: https://www.linkedin.com/in/javeria-akram-10b607334/
+
+## About the author
+
+Javeria Akram is a builder working across Agentic AI, Cybersecurity, and Web Development. She has hands-on experience spanning security audits, network analysis, backend systems, and cloud infrastructure, and is Google and Microsoft certified. Connect on LinkedIn: https://www.linkedin.com/in/javeria-akram-10b607334/
