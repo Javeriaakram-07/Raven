@@ -66,25 +66,30 @@ function buildPDF(data) {
     doc.text(str, x, ty, { maxWidth: opts.maxWidth, align: opts.align });
   }
 
-  // Draws the Raven mark — a bordered box with an angular "wing" glyph,
-  // matching the site's actual logo instead of a plain circle+letter.
-  function drawLogo(x, ry, size) {
-    doc.setDrawColor(...C.accent);
-    doc.setLineWidth(0.5);
-    doc.roundedRect(x, ry, size, size, 1.2, 1.2, 'S');
-
-    doc.setDrawColor(...C.accent);
-    doc.setLineWidth(0.7);
-    const s = size / 48; // scale factor from the 48x48 SVG viewBox
-    doc.lines(
-      [
-        [7 * s, -17 * s], [5 * s, 10 * s], [5 * s, -10 * s], [7 * s, 17 * s],
-      ],
-      x + 12 * s, ry + 32 * s,
-      [1, 1], 'S', false
-    );
-    doc.setFillColor(...C.accent);
-    doc.circle(x + 24 * s, ry + 25 * s, 1 * s, 'F');
+  // Load the real logo PNG (512x512) and draw it scaled down in the report header.
+  // Falls back to the SVG-drawn mark if the image can't be fetched.
+  async function drawLogo(x, ry, size) {
+    try {
+      const resp = await fetch('/android-chrome-512x512.png');
+      const blob = await resp.blob();
+      const b64 = await new Promise((res, rej) => {
+        const reader = new FileReader();
+        reader.onload = () => res(reader.result);
+        reader.onerror = rej;
+        reader.readAsDataURL(blob);
+      });
+      doc.addImage(b64, 'PNG', x, ry, size, size);
+    } catch {
+      // Fallback: draw the SVG mark programmatically
+      doc.setDrawColor(...C.accent);
+      doc.setLineWidth(0.5);
+      doc.roundedRect(x, ry, size, size, 1.2, 1.2, 'S');
+      doc.setLineWidth(0.7);
+      const s = size / 48;
+      doc.lines([[7*s,-17*s],[5*s,10*s],[5*s,-10*s],[7*s,17*s]], x+12*s, ry+32*s, [1,1], 'S', false);
+      doc.setFillColor(...C.accent);
+      doc.circle(x+24*s, ry+25*s, 1*s, 'F');
+    }
   }
 
   function fillPage() {

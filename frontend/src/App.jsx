@@ -8,11 +8,13 @@ import { useScan } from './hooks/useScan.js';
 const MAX_LENGTH = 8000;
 function RavenMark() {
   return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="1" y="1" width="46" height="46" rx="4" stroke="var(--accent)" strokeWidth="1.5"/>
-      <path d="M12 32L19 15L24 25L29 15L36 32" stroke="var(--accent)" strokeWidth="2.2" strokeLinecap="square" strokeLinejoin="miter" fill="none"/>
-      <circle cx="24" cy="25" r="1.8" fill="var(--accent)"/>
-    </svg>
+    <img
+      src="/android-chrome-192x192.png"
+      alt="Raven logo"
+      width="44"
+      height="44"
+      style={{ display: 'block', borderRadius: 8 }}
+    />
   );
 }
 export default function App() {
