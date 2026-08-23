@@ -100,6 +100,15 @@ export default function App() {
       </main>
 
       <footer className="footer" role="contentinfo">
+        <a
+          href="https://www.producthunt.com/products/raven-6?utm_source=badge&utm_medium=badge"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 8, color: '#ff6154', fontSize: 13, fontWeight: 600, textDecoration: 'none' }}
+        >
+          🐱 Featured on Product Hunt
+        </a>
+        <br />
         Raven, built by <a href="/docs/about">Javeria Akram</a> &middot; <a href="/docs">Docs</a> &middot; <a href="/docs/privacy">Privacy</a> &middot; <a href="/docs/terms">Terms</a> &middot; &copy; 2026
       </footer>
     </div>
