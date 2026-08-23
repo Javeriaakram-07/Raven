@@ -34,7 +34,7 @@ function verdictColor(v) {
 
 // ── PDF builder ──────────────────────────────────────────────────────────────
 
-function buildPDF(data) {
+async function buildPDF(data) {
   const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
   const W = 210;
   const H = 297;
@@ -115,7 +115,7 @@ function buildPDF(data) {
   const logoX = margin;
   const logoY = 16;
   const logoSize = 16;
-  drawLogo(logoX, logoY, logoSize);
+  await drawLogo(logoX, logoY, logoSize);
 
   text('RAVEN', logoX + logoSize + 6, logoY + 8, { size: 22, style: 'bold', color: C.textPrimary });
   text('AI System Prompt Vulnerability Scan Report', logoX + logoSize + 6, logoY + 14, { size: 9, color: C.textSecond });
@@ -310,10 +310,10 @@ export function ExportButtons({ results }) {
     downloadBlob(JSON.stringify(results, null, 2), `raven-scan-${timestamp}.json`, 'application/json');
   }
 
-  function exportPDF() {
+  async function exportPDF() {
     setPdfBusy(true);
     try {
-      const doc = buildPDF(results);
+      const doc = await buildPDF(results);
       doc.save(`raven-scan-${timestamp}.pdf`);
     } catch (err) {
       console.error('[ExportButtons] PDF generation failed:', err);
