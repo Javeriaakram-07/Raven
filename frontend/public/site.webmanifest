@@ -1,5 +1,5 @@
 {
-  "name": "Raven — AI System Prompt Scanner",
+  "name": "Raven | AI System Prompt Scanner",
   "short_name": "Raven",
   "description": "Scan your AI chatbot's system prompt for prompt injection, jailbreaks, and information-leakage vulnerabilities.",
   "icons": [
