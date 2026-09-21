@@ -187,4 +187,4 @@ VITE_API_URL=https://raven-m0cy.onrender.com
 
 ## Author
 
-Built by [Javeria Akram](https://www.linkedin.com/in/javeria-akram-10b607334/) — CS student at PUCIT, FCIT. Campus Ambassador at GeeksforGeeks. Working across agentic AI, cybersecurity, and web development.
+Built by [Javeria Akram](https://www.linkedin.com/in/javeria-akram-10b607334/) — CS student at PUCIT, FCIT. Penetration tester at Orzeh. Working across agentic AI, cybersecurity, and web development.
